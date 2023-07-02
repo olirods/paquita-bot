@@ -16,7 +16,7 @@ module Clockwork
         }
       }
 
-      elements = notion_client.database_query(database_id: '629199223c6949f4afde6ecf4d871aa9', filter:)
+      elements = notion_client.database_query(database_id: '629199223c6949f4afde6ecf4d871aa9', filter: filter)
 
       list = ''
       elements.results.map do |item|

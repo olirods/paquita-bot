@@ -11,7 +11,7 @@ module Telegram
     end
 
     def send_message(text)
-      bot.api.send_message(chat_id:, text:)
+      bot.api.send_message(chat_id: chat_id, text: text)
     end
 
     private
