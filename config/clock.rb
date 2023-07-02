@@ -27,7 +27,7 @@ module Clockwork
     end
   end
 
-  every(15.seconds, 'frequent.job') do
+  every(1.day, 'frequent.job') do
     send_shopping_list_update
   end
 end
