@@ -7,7 +7,7 @@ require './config/environment'
 module Clockwork
   class << self
     def send_shopping_list_update
-      list = Notion::ShoppingListClient.new.pending_items
+      list = Notion::ShoppingListClient.new.current_items
 
       return if list.empty?
 
