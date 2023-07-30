@@ -2,16 +2,15 @@
 
 module Notion
   class ShoppingListClient < BaseClient
-
     def current_items
       elements = client.database_query(database_id: database_id, filter: filter_by_added)
 
       elements.results.map { |item| item.properties.Name.title[0].plain_text }
     end
-    
+
     private
 
-    attr_reader :client, :database_id
+    attr_reader :client
 
     def filter_by_added
       {
@@ -27,4 +26,3 @@ module Notion
     end
   end
 end
-  

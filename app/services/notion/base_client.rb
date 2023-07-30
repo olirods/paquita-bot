@@ -2,7 +2,7 @@
 
 module Notion
   class BaseClient
-    def initialize()
+    def initialize
       @client = Notion::Client.new(token: token)
       @database_id = database_id
     end

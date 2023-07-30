@@ -47,6 +47,7 @@ gem 'bootsnap', require: false
 # Paquita gems
 gem 'clockwork', '~> 3.0.2'
 gem 'notion-ruby-client', '~> 1.2.1'
+gem 'ruby-openai', '~> 4.1.0'
 gem 'telegram-bot-ruby', '~> 1.0'
 
 gem 'dotenv-rails'
