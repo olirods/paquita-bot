@@ -1,0 +1,2 @@
+module AvuiHelper
+end
