@@ -7,7 +7,8 @@
     <div class="news">
       <div class="editable-text">
         <h3>Texto 1:</h3>
-        <textarea id="newsText1" rows="6" cols="50">El PP rechaza la "comisión de trabajo" propuesta por Sánchez para negociar la renovación del CGPJ
+        <form id="generateForm">
+        <textarea id="text1" name="text1" rows="6" cols="50">El PP rechaza la "comisión de trabajo" propuesta por Sánchez para negociar la renovación del CGPJ
 El presidente del Gobierno ha anunciado que planteará al líder de la oposición una comisión de trabajo donde abordar la renovación del Poder Judicial, la reforma del artículo 49 de la Constitución y la cuestión de la financiación autonómica. Una propuesta que ya ha rechazado el PP.
 
 Reunión con el líder del PP
@@ -38,7 +39,7 @@ Precisamente, la víspera Sánchez ya indicó, en un corrillo informal con perio
     <div class="news">
       <div class="editable-text">
         <h3>Texto 2:</h3>
-        <textarea id="newsText2" rows="6" cols="50">Génova se revuelve contra el “despropósito” de la mesa de trabajo que ahora ofrece Sánchez
+        <textarea name="text2" id="text2" rows="6" cols="50">Génova se revuelve contra el “despropósito” de la mesa de trabajo que ahora ofrece Sánchez
 Moncloa intenta distraer la atención hacia una oferta de pactos de Estado que inhabilita su negociación con Puigdemont
 
  La entrevista que ayer hizo Susanna Griso al presidente del Gobierno, Pedro Sánchez, en Espejo Público, Antena 3, fue el marco desde el que Moncloa puso en marcha el experimento de su nueva estrategia para intentar crear un marco más favorable para Sánchez en un contexto político duro y en el que lo peor de la negociación con los independentistas está por llegar, y no ha sido el pacto de investidura. La semana que viene se celebrará en el Congreso el primer debate sobre la ley de amnistía y los grupos también han incluido en el orden del día el debate sobre la creación de las polémicas comisiones de investigación que los socialistas acordaron abrir con los independentistas catalanes.
@@ -59,12 +60,45 @@ Por otra parte, Sánchez introdujo en su argumentario la idea de que Feijóo tam
       </div>
     </div>
 
-    <button onclick="generateW()">Generar 5W</button>
+    <button type="submit">Generar 5W</button>
+    </form>
 
     <div class="clean-news">
       <h3>Cinco W:</h3>
       <ul id="resultList">
-        <!-- Aquí se mostrarán las 5W -->
-      </ul>
+    </ul>
     </div>
   </div>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const generateForm = document.getElementById('generateForm');
+      generateForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('/avui/demo1/generate', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Mostrar los resultados en el elemento 'resultList'
+          const resultList = document.getElementById('resultList');
+          resultList.innerHTML = `
+            <li><strong>What:</strong> ${data.what}</li>
+            <li><strong>Who:</strong> ${data.who}</li>
+            <li><strong>Where:</strong> ${data.where}</li>
+            <li><strong>When:</strong> ${data.when}</li>
+            <li><strong>Why:</strong> ${data.why}</li>
+          `;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+  </script>
