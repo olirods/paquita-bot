@@ -9,7 +9,7 @@ module ChatGpt
     def generate_text(input)
       response = client.chat(
         parameters: {
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4',
           messages: [{ role: 'user', content: input }]
         }
       )

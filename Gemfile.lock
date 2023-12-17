@@ -126,6 +126,7 @@ GEM
     faraday-net_http (3.0.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    google_search_results (2.2.0)
     hashie (5.0.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -179,6 +180,10 @@ GEM
       faraday-mashify (>= 0.1.1)
       faraday-multipart (>= 1.0.4)
       hashie (~> 5)
+    open-uri (0.4.1)
+      stringio
+      time
+      uri
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -258,12 +263,15 @@ GEM
     sqlite3 (1.6.3-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    stringio (3.1.0)
     telegram-bot-ruby (1.0.0)
       dry-struct (~> 1.6)
       faraday (~> 2.0)
       faraday-multipart (~> 1.0)
       zeitwerk (~> 2.6)
     thor (1.2.2)
+    time (0.3.0)
+      date
     timeout (0.3.2)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -272,6 +280,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    uri (0.13.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -300,9 +309,12 @@ DEPENDENCIES
   clockwork (~> 3.0.2)
   debug
   dotenv-rails
+  google_search_results (~> 2.2)
   importmap-rails
   jbuilder
+  nokogiri (~> 1.15)
   notion-ruby-client (~> 1.2.1)
+  open-uri (~> 0.4.1)
   puma (~> 6.4.0)
   rails (~> 7.0.5)
   rubocop

@@ -49,6 +49,9 @@ gem 'clockwork', '~> 3.0.2'
 gem 'notion-ruby-client', '~> 1.2.1'
 gem 'ruby-openai', '~> 4.1.0'
 gem 'telegram-bot-ruby', '~> 1.0'
+gem 'google_search_results', '~> 2.2'
+gem 'open-uri', '~> 0.4.1'
+gem 'nokogiri', '~> 1.15'
 
 gem 'dotenv-rails'
 

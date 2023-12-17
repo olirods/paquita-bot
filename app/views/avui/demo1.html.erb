@@ -2,7 +2,14 @@
   <img src='https://elasticbeanstalk-eu-west-1-338733064390.s3.eu-west-1.amazonaws.com/Screenshot+2023-12-08+at+19.18.57.png' width='100' height='100'>
 </div>
 <div class="container">
-  <h1>DEMO 1</h1>
+  <h1>POC 1</h1>
+  <p><b>Descripción</b></p>
+  <p>Esta prueba de concepto se centra en probar las tareas de resumen, síntesis y neutralización de las noticias por parte de la IA. Se quiere comprobar aquí qué tan bien puede llevar la IA a cabo estas tareas. Estamos usando el modelo de OpenAI GPT-4.</p>
+  <p>El funcionamiento de esta demo es el siguiente:</p>
+  <p>1. El usuario introduce dos textos de distintos medios sobre una misma noticia, en este caso acerca del rechazo por parte del PP de la comisión de trabajo con el PSOE</p>
+  <p>2. El servidor recibe los textos, y realiza una petición al modelo de IA para que genere 5W sintetizando la noticia de una forma neutral y didáctica.</p>
+  <p>3. Recibimos la respuesta por parte del modelo y la renderizamos en la demo.</p>
+  <p><b>Demo</b> (puedes experimentar modificando los campos de entrada)</p>
 
     <div class="news">
       <div class="editable-text">
@@ -60,7 +67,9 @@ Por otra parte, Sánchez introdujo en su argumentario la idea de que Feijóo tam
       </div>
     </div>
 
-    <button type="submit">Generar 5W</button>
+    <div class="generation">
+      <button type="submit">Generar 5W</button><img id="gifLoading" style="display: none;" class="loading" src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif" width="20" height="20">
+    </div>
     </form>
 
     <div class="clean-news">
@@ -76,6 +85,9 @@ Por otra parte, Sánchez introdujo en su argumentario la idea de que Feijóo tam
         event.preventDefault();
 
         const formData = new FormData(this);
+
+        const gif = document.getElementById('gifLoading');
+        gif.style.display = 'block';
 
         fetch('/avui/demo1/generate', {
           method: 'POST',
@@ -95,6 +107,7 @@ Por otra parte, Sánchez introdujo en su argumentario la idea de que Feijóo tam
             <li><strong>When:</strong> ${data.when}</li>
             <li><strong>Why:</strong> ${data.why}</li>
           `;
+          gif.style.display = 'none';
         })
         .catch(error => {
           console.error('Error:', error);

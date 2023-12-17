@@ -1,0 +1,79 @@
+<div class="header">
+  <img src='https://elasticbeanstalk-eu-west-1-338733064390.s3.eu-west-1.amazonaws.com/Screenshot+2023-12-08+at+19.18.57.png' width='100' height='100'>
+</div>
+<div class="container">
+  <h1>POC 2</h1>
+  <p><b>Descripción</b></p>
+  <p>Esta prueba de concepto se centra en probar las tareas de "web scraping". Es indispensable para el correcto funcionamiento de la aplicación la capacidad de conectarnos a Internet y obtener información reciente sobre el tema de actualidad en cuestión.</p>
+  <p>El funcionamiento de esta demo es el siguiente:</p>
+  <p>1. El usuario introduce un término de búsqueda, ej. "Matthew Perry muerte"
+  <p>2. En ese momento, el servidor recibe la petición y en un primer lugar hace una búsqueda en Google sobre ese término. Para simplificar este POC, realiza la búsquedas en dos plataformas de noticias estatales concretas: RTVE y Agencia EFE.</p>
+  <p>3. Una vez ha descargado el código HTML de la noticia en estas dos webs, busca el contenido plano de la noticia en sí (En este caso para la POC, se ha buscado previamente el selector CSS que usan estas dos webs, en la aplicación esta búsqueda la podría hacer en tiempo real la IA)</p>
+  <p>4. Una vez tenemos los textos planos, se envían al cliente y se renderizan.</p>
+  <p><b>Demo</b> (puedes experimentar modificando los campos de entrada) </p>
+  <div class="search-term">
+    <form id="generateForm">
+        <input type="text" name="term" placeholder="Introduce un tema..." value="Matthew Perry muerte">
+        <div class="generation">
+            <button type="submit">Generar textos</button>
+            <img id="gifLoading" style="display: none;" class="loading" src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif" width="20" height="20">
+        </div>
+    </form>
+  </div>
+
+  <div class="generated-text">
+    <div class="text">
+      <h3>Texto 1:</h3>
+      <p id="text1"></p>
+      <br>
+      <p id="link1"></p>
+    </div>
+    <div class="text">
+      <h3>Texto 2:</h3>
+      <p id="text2"></p>
+      <br>
+      <p id="link2"></p>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const generateForm = document.getElementById('generateForm');
+      generateForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        const gif = document.getElementById('gifLoading');
+        gif.style.display = 'block';
+
+        fetch('/avui/demo2/generate', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          const text1 = document.getElementById('text1');
+          const link1 = document.getElementById('link1');
+
+          const text2 = document.getElementById('text2');
+          const link2 = document.getElementById('link2');
+          
+          text1.innerHTML = data.text1;
+          link1.innerHTML = `Source: ${data.link1}`;
+
+          text2.innerHTML = data.text2;
+          link2.innerHTML = `Source: ${data.link2}`;
+
+          gif.style.display = 'none';
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+  </script>
