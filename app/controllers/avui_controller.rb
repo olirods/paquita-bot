@@ -33,4 +33,7 @@ class AvuiController < ApplicationController
 
     render json: {text1: story1, link1: link1, text2: story2, link2: link2}
   end
+
+  def demo3
+  end
 end
