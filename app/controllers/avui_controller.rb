@@ -34,6 +34,19 @@ class AvuiController < ApplicationController
     render json: {text1: story1, link1: link1, text2: story2, link2: link2}
   end
 
+  def demo3_initial
+  end
+
   def demo3
+    person = params[:person]
+
+    result = ChatGpt::Client.new.generate_text("¿Quién es #{person}? Dame contexto para una persona que no la conozca de nada, en 80 palabras más o menos. Formato HTML, separado en párrafos, negrita, etc. para fomentar su legibilidad.")
+    urls = Search::Client.new.find_images(person)
+
+    puts urls
+
+    @person = person
+    @context = result
+    @images = urls
   end
 end

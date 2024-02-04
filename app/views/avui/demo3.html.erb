@@ -10,21 +10,36 @@
     <div class="logo">
       <img src="https://elasticbeanstalk-eu-west-1-338733064390.s3.eu-west-1.amazonaws.com/Screenshot+2023-12-08+at+19.18.57.png" alt="Logo">
     </div>
-    <h1>Aitana</h1>
+    <h1><%=@person%></h1>
   </header>
 
   <div class="dashboard">
     <div class="widget">
-      <h2>Título del Widget 1</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at est aliquam, cursus dui nec, faucibus dolor.</p>
+      <div class="carousel">
+        <div class="slide">
+          <%= image_tag @images[0][:original] %>
+        </div>
+        <div class="slide">
+          <%= image_tag @images[1][:original] %>
+        </div>
+        <div class="slide">
+          <%= image_tag @images[2][:original] %>
+        </div>
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+      <p><i>Imágenes encontradas mediante scraping en Google Imágenes con el término "<%=@person%>"</i></p>
     </div>
 
     <div class="widget">
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3620_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Aitana","geo":"ES","time":"2024-02-02T12 2024-02-03T12"}],"category":0,"property":""}, {"exploreQuery":"q=Aitana&date=now%201-d&geo=ES&hl=es","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>    </div>
+      <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3620_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"<%=@person%>","geo":"ES","time":"2004-01-01 2024-02-04"}],"category":0,"property":""}, {"exploreQuery":"date=all&geo=ES&q=<%=@person%>&hl=es","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+      <p><i>Widget embebido de Google Trends generado automáticamente a partir del término "<%=@person%>"</i></p>
+    </div>
 
     <div class="widget">
-      <h2>Título del Widget 3</h2>
-      <p>Vivamus at libero eu ipsum ultrices eleifend. Morbi pellentesque velit in nulla venenatis, at tincidunt justo laoreet.</p>
+      <h2>Contexto</h2>
+      <div id="context"><%= sanitize @context %></div>
+      <p><i>Texto generado por ChatGPT a partir del término "<%=@person%>"</i></p>
     </div>
 
     <div class="widget">
@@ -45,4 +60,30 @@
   </div>
 
 </body>
+<script>
+  var slideIndex = 0;
+  function showSlides(diff) {
+    var i;
+    var slides = document.getElementsByClassName("slide");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex+=diff;
+    if (slideIndex == slides.length) {slideIndex = 0}
+    if (slideIndex == -1) {slideIndex = slides.length-1}
+    slides[slideIndex].style.display = "block";
+    console.log(slideIndex);
+  }
+
+  document.querySelector('.prev').addEventListener('click', function() {
+    showSlides(-1);
+  });
+
+  document.querySelector('.next').addEventListener('click', function() {
+    showSlides(1);
+  });
+
+  showSlides(0);
+
+</script>
 </html>

@@ -153,15 +153,17 @@ body.demo3 {
 
   .dashboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 20px;
   }
 
   .widget {
+    height: 450px;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajusta la sombra según sea necesario */
+    position: relative;
   }
 
   .widget h2 {
@@ -170,7 +172,53 @@ body.demo3 {
   }
 
   .widget p {
-    margin: 0;
+    margin-top: 10px;
     color: #666;
+  }
+
+  div#context {
+    font-size: 18px;
+
+    p {
+      color: black;
+    }
+  }
+
+  .carousel {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slide {
+    display: none;
+    width: 100%;
+  }
+  
+  .slide img {
+    width: 100%;
+    object-fit: cover;
+    height: 370px;
+  }
+  
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
   }
 }
